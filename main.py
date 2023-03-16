@@ -1,3 +1,4 @@
+from language-classifier import identify_language
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
@@ -136,31 +137,8 @@ while True:
     if response == "good response":
         zackBot.learn_response(user_response, zackBot_response)
         print("Thanks I'm Learning!")
-    elif response == "hi":
-        print("Hey")
-    elif "whats up" in response:
-        print("Not much")
-    elif "how are you" in response:
-        print("I'm good, do you want to play any sports??")
-    elif "math class" in response:
-        print("Yo Mr. Minor's? That class is good ")
-    elif  "name" in response:
-        print("My name is Zack")
-    elif  "i dont like Zack" in response:
-        print("Well you look ugly")
-    elif  "no you" in response:
-        print("No you")
-    elif  "sure" in response:
-        print("Basketball or soccer")
-    elif  "never mind" in response:
-        print("Why I hate you!")
-    elif  "i hate you" in response:
-        print("No honestly you are ugly")
-    elif "bot" and "broken" in response:
-        print("You don't work")
-    else:
-        zackBot_response = zackBot.get_response(response)
-        print(zackBot_response)
-    user_response = response
+    if identify_language(response, models, n_vals=range(1,4)) != 'english':
+        print("Sorry, I don't speak that language!")
+
     
 print("ight ill see ya")
